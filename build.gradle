@@ -1,0 +1,70 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.12.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.zc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    runtimeOnly('mysql:mysql-connector-java')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'//Lang组件主要是一些工具类，涉及到数组工具类，字符串工具类，字符工具类，数学方面，时间日期工具类，异常，事件等工具类。
+
+    annotationProcessor "org.projectlombok:lombok-maven-plugin:1.16.20.0"
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+
+    testCompile group: 'org.apache.velocity', name: 'velocity-engine-core', version: '2.0'
+    compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.28'
+
+
+
+    compile group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '2.3.3'//springboot整合mybatisplus
+    compile "org.springframework.boot:spring-boot-starter-jdbc"//jdbc
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44' //  mysql驱动
+    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.0'//alibaba连接池
+
+
+
+
+    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.0'
+
+    //swagger系列
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    compile group: 'io.swagger', name: 'swagger-annotations', version: '1.5.21'
+    compile group: 'io.swagger', name: 'swagger-models', version: '1.5.21'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+
+
+}
