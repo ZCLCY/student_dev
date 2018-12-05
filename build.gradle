@@ -68,7 +68,7 @@ dependencies {
 
 
     // shiro系列
-    compile 'org.apache.shiro:shiro-spring:1.4.0'  shiro整合spring
+    compile 'org.apache.shiro:shiro-spring:1.4.0' // shiro整合spring
 
 
 }
