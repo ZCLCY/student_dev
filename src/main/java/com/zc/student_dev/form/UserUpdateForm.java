@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class UserUpdateForm {
-    @ApiModelProperty(value = "模板名称")
+    @ApiModelProperty(value = "用户名")
     private String username;
 }

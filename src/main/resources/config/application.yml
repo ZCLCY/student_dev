@@ -19,6 +19,13 @@ swagger:
   version: 1.0
   basePackage: com.zc.student_dev
 
+#shiro配置
+shiro:
+  config:
+    login:
+        url: /notLogin
+
+
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
   # 如果是放在resource目录 classpath:/mapper/*Mapper.xml

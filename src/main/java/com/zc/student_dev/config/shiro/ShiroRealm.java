@@ -1,59 +1,58 @@
 package com.zc.student_dev.config.shiro;
 
 
-
-import org.springframework.beans.BeanUtils;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.zc.student_dev.entity.User;
+import com.zc.student_dev.service.IUserService;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-/**
- * @program: ai_callcenter
- * @description: shiro自定义的realm，用于获取用户的认证和授权
- * @author:
- * @create: 2018-10-24 09:39
- **/
-/*
+
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
-    private IUserService userService;
+    private IUserService iUserService;
 
-    */
-/** 授权 *//*
-
+    /**
+     * 执行授权逻辑
+     * @param principals
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        User sysUser = new User();
-        BeanUtils.copyProperties(principals.getPrimaryPrincipal(),sysUser);
-        Long userid = sysUser.getId();
-        User user = userService.selectById(userid);
-        authorizationInfo.setRoles(user.getRoleSet().stream().map(e->e.getCode()).collect(Collectors.toSet()));
-        authorizationInfo.setStringPermissions(user.getPermissionSet().stream().map(e->e.getCode()).collect(Collectors.toSet()));
-        return authorizationInfo;
+        System.out.println("执行授权逻辑");
+        return null;
     }
 
-    */
-/** 认证 *//*
-
+    /**
+     * 去执行认证逻辑
+     * @param token
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        System.out.println("执行认证逻辑");
+        //编写shiro判断逻辑，判断用户名和密码
         String username = (String)token.getPrincipal();
-        User user = userService.selectUserByUsername(username);
-        if(Objects.isNull(user) || Objects.isNull(user.getPassword()) || Objects.isNull(user.getSalt())){
+        Wrapper<User> wrapper = new EntityWrapper<>();
+        wrapper.eq("username",username);
+        User user = iUserService.selectOne(wrapper);
+        if(Objects.isNull(user) || Objects.isNull(user.getPassword())){
             return null;
         }
-        */
-/* 状态 0禁用 1可用 2 账户被锁定 4 删除 *//*
-
-        if(Arrays.asList(0,2,4).contains(user.getStatus())){
-            throw new LockedAccountException();
-        }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassword(),ByteSource.Util.bytes(user.getSalt()),this.getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo
+                ("",user.getPassword(),"");
         return authenticationInfo;
     }
+
+
 }
-*/

@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 public class UserAddFrom {
-    @ApiModelProperty(value = "模板名称")
+    @ApiModelProperty(value = "用户名")
     private String username;
-    @ApiModelProperty(value = "模板类型")
+    @ApiModelProperty(value = "密码")
     private String password;
 
 }

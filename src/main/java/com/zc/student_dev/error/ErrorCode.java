@@ -11,6 +11,11 @@ public enum ErrorCode {
      * 服务端异常
      */
     DATA_CURDERR(1007, "数据CURD操作失败"),
+    NOT_LOGIN(1008,"请先登录"),
+    ALREADY_LOGGED(1009,"你已经登陆了"),
+    USER_NOT_EXIST(1100,"用户名不存在"),
+    PASSWORD_ERROR(1101,"密码错误"),
+    LOGOUT_SUCCESS(1102,"退出成功"),
     ;
 
     private int code;
