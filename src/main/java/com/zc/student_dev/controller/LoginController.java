@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+/**
+ * 这是一个秘密
+ */
 
 @Api(tags = "登录与退出")
 @RestController
