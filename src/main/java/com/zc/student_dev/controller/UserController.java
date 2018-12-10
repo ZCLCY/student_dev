@@ -14,9 +14,10 @@ import com.zc.student_dev.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,7 +91,7 @@ public class UserController {
 
 
     @GetMapping("/listSmsTemplate")
-    @ApiOperation(value = "查询所有短信模板", notes = "成功success，失败failure")
+    @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
         Page<User> page = new Page<>(query.getPage(), query.getLimit(), query.getSortName(), query.isAsc());
         Wrapper<User> wrapper = new EntityWrapper<>();
@@ -107,6 +108,11 @@ public class UserController {
         }).collect(Collectors.toList());
         return new MessageResult<List<User>>().ok(volist, pageSmsTemplate.getTotal());
     }
+
+
+
+
+
 
 
 }
