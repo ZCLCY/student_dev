@@ -1,13 +1,20 @@
 package com.zc.student_dev.config.shiro;
 
+import com.zc.student_dev.Util.ShiroUtils;
+import lombok.extern.slf4j.Slf4j;
+
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -34,6 +41,7 @@ public class ShiroConfiguration {
          */
         Map<String, String> filterHashMap = new HashMap<>();
         filterHashMap.put("/student_dev/user/list","authc");
+  //      filterHashMap.put("authc",shiroFormAuthenticationFilter());
         //跳转到登陆的页面
         shiroFilterFactoryBean.setLoginUrl(loginUrl);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterHashMap);
@@ -63,5 +71,15 @@ public class ShiroConfiguration {
     }
 
 
+
+    /*@Bean
+    public HashedCredentialsMatcher matcher() {
+        HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+        //散列算法:这里使用MD5算法;
+        matcher.setHashAlgorithmName(ShiroUtils.HASH_ALGORITHM);
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        matcher.setHashIterations(ShiroUtils.HASH_ITERATIONS);
+        return matcher;
+    }*/
 
 }

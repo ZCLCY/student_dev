@@ -24,5 +24,6 @@ public class User extends ModelDomain {
 
     private String password;
 
+    private String salt;
 
 }
