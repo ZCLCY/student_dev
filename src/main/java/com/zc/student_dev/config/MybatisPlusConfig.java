@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
+        PaginationInterceptor pagination = new PaginationInterceptor();
+        pagination.setLocalPage(true);    //开启pagehelp的支持
+        return pagination;
     }
 }

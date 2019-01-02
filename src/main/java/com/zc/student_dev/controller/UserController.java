@@ -14,9 +14,7 @@ import com.zc.student_dev.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -104,6 +102,9 @@ public class UserController {
         List<User> volist = listSmsTemplate.stream().map(smsTemplate -> {
             User vo  = new User();
             vo.setUsername(smsTemplate.getUsername());
+            vo.setPassword(smsTemplate.getPassword());
+            vo.setCrtTime(smsTemplate.getCrtTime());
+            vo.setUpdTime(smsTemplate.getUpdTime());
             return vo;
         }).collect(Collectors.toList());
         return new MessageResult<List<User>>().ok(volist, pageSmsTemplate.getTotal());
