@@ -26,4 +26,7 @@ public class User extends ModelDomain {
 
     private String salt;
 
+    //新加的  没用
+    private Object ua;
+
 }

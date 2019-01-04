@@ -16,6 +16,8 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +39,8 @@ public class UserController {
 
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @GetMapping("/list")
     @ApiOperation(value = "查询用户", notes = "成功success，失败failure")
@@ -92,9 +96,10 @@ public class UserController {
     @GetMapping("/listSmsTemplate")
     @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
+        redisTemplate.opsForValue().set("name","zclcy");
+        System.out.println(redisTemplate.opsForValue().get("name"));
         Page<User> page = new Page<>(query.getPage(), query.getLimit(), query.getSortName(), query.isAsc());
         Wrapper<User> wrapper = new EntityWrapper<>();
-
         if (StringUtils.isNotBlank(query.getUsername())) {
             wrapper.like("username", query.getUsername());
         }

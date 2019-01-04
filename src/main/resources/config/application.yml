@@ -12,6 +12,14 @@ spring:
 server:
   port: 8085
 
+# redis
+  redis:
+    host: 127.0.0.1
+    password: zc468082
+    port: 6379
+    database: 0
+    pool:
+      min-idle: 5
 
 #swagger配置
 swagger:
