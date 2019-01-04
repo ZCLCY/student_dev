@@ -20,13 +20,8 @@ public class User extends ModelDomain {
 
     private static final long serialVersionUID = 1L;
 
+    private String number;
     private String username;
-
     private String password;
-
     private String salt;
-
-    //新加的  没用
-    private Object ua;
-
 }

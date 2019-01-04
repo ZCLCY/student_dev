@@ -4,6 +4,7 @@ package com.zc.student_dev.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.zc.student_dev.Util.UUIDUtil;
 import com.zc.student_dev.entity.User;
 import com.zc.student_dev.error.ErrorCode;
 import com.zc.student_dev.form.UserAddFrom;
@@ -60,6 +61,7 @@ public class UserController {
     @ApiOperation(value = "新增用户", notes = "成功success，失败failure")
     public MessageResult<String> insert(@RequestBody UserAddFrom form) {
         User user = new User();
+        user.setNumber(UUIDUtil.getUUID("zc"));
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
         Boolean flag = iUserService.insert(user);
@@ -93,7 +95,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/listSmsTemplate")
+    @GetMapping("/")
     @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
         redisTemplate.opsForValue().set("name","zclcy");
