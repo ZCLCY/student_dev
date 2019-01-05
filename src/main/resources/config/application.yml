@@ -27,12 +27,6 @@ swagger:
   version: 1.0
   basePackage: com.zc.student_dev
 
-#shiro配置
-shiro:
-  config:
-    login:
-        url: /notLogin
-
 
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
@@ -67,3 +61,27 @@ mybatis-plus:
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
+
+#shiro配置
+shiro:
+  config:
+    login:
+        url: /notLogin
+    filter:
+      map: "{
+            '/': 'anon',
+            '/api': 'anon',
+            '/notLogin': 'anon',
+            '/logout': 'anon',
+            '/login': 'anon',
+            '/health': 'anon',
+            '/swagger-ui.html': 'anon',
+            '/swagger-resources/**': 'anon',
+            '/webjars/springfox-swagger-ui/**': 'anon',
+            '/druid/**': 'anon',
+            '/**': 'authc'
+           }"
+    rememberMe:
+      name: "rememberMe"
+      maxAge: 604800
+    authenticationCacheName: authorizationCache

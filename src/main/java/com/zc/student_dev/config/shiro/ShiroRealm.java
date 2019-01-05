@@ -10,12 +10,14 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
+import java.util.Set;
 
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -31,7 +33,13 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         System.out.println("执行授权逻辑");
-        return null;
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        User userDTO = (User) principals.getPrimaryPrincipal();   //获取用户登录信息
+        /*Set<String> roles = userService.selectRoleCodeByUserId(userDTO.getId());
+        authorizationInfo.setRoles(roles);
+        Set<String> permissions = userService.selectPermissionCodeByUserId(userDTO.getId());
+        authorizationInfo.setStringPermissions(permissions);*/
+        return authorizationInfo;
     }
 
     /**
@@ -42,8 +50,6 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        System.out.println("执行认证逻辑");
-        //编写shiro判断逻辑，判断用户名和密码
         String username = (String)token.getPrincipal();
         Wrapper<User> wrapper = new EntityWrapper<>();
         wrapper.eq("username",username);
