@@ -68,7 +68,12 @@ dependencies {
 
 
     // shiro系列
-    compile 'org.apache.shiro:shiro-spring:1.4.0' // shiro整合spring
+    compile 'org.apache.shiro:shiro-spring:1.4.0'  //shiro整合spring
 
+
+    // redis
+    compile 'org.crazycake:shiro-redis:3.1.0'
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.45'
 
 }

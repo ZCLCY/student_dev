@@ -48,7 +48,7 @@ public class LoginController {
             messageResult = messageResult.ok(ErrorCode.ALREADY_LOGGED);
             return messageResult;
         }
-        return null;
+        return messageResult;
     }
 
     @ApiOperation("退出登录")

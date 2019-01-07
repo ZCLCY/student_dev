@@ -12,18 +12,20 @@ spring:
 server:
   port: 8085
 
+# redis
+  redis:
+    host: 127.0.0.1
+    password: zc468082
+    port: 6379
+    database: 0
+    pool:
+      min-idle: 5
 
 #swagger配置
 swagger:
   show: true
   version: 1.0
   basePackage: com.zc.student_dev
-
-#shiro配置
-shiro:
-  config:
-    login:
-        url: /notLogin
 
 
 mybatis-plus:
@@ -51,9 +53,35 @@ mybatis-plus:
     logic-delete-value: 1
     logic-not-delete-value: 0
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+    #自定义填充策略接口实现
+    meta-object-handler: com.zc.student_dev.aop.MyMetaObjectHandler
   configuration:
     #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
     map-underscore-to-camel-case: true
     cache-enabled: false
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
+
+#shiro配置
+shiro:
+  config:
+    login:
+        url: /notLogin
+    filter:
+      map: "{
+            '/': 'anon',
+            '/api': 'anon',
+            '/notLogin': 'anon',
+            '/logout': 'anon',
+            '/login': 'anon',
+            '/health': 'anon',
+            '/swagger-ui.html': 'anon',
+            '/swagger-resources/**': 'anon',
+            '/webjars/springfox-swagger-ui/**': 'anon',
+            '/druid/**': 'anon',
+            '/**': 'authc'
+           }"
+    rememberMe:
+      name: "rememberMe"
+      maxAge: 604800
+    authenticationCacheName: authorizationCache
