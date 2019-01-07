@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 
-# 内嵌服务器配置tomcat,jetty
+# 内嵌服务器配置tomcat,jetty，端口8085
 server:
   port: 8085
 
