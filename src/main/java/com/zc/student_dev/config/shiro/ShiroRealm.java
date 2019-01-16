@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zc.student_dev.entity.User;
 import com.zc.student_dev.service.IUserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -17,7 +14,6 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
-import java.util.Set;
 
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -54,6 +50,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Wrapper<User> wrapper = new EntityWrapper<>();
         wrapper.eq("username",username);
         User user = iUserService.selectOne(wrapper);
+        user.setId(user.getId());
         if(Objects.isNull(user) || Objects.isNull(user.getPassword()) || Objects.isNull(user.getSalt())){
             return null;
         }

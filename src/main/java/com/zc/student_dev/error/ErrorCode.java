@@ -12,6 +12,7 @@ public enum ErrorCode {
      */
     DATA_CURDERR(1007, "数据CURD操作失败"),
     NOT_LOGIN(1008,"请先登录"),
+    LOGIN_SECCUSS(3101,"登录成功"),
     ALREADY_LOGGED(1009,"你已经登陆了"),
     USER_NOT_EXIST(1100,"用户名不存在"),
     PASSWORD_ERROR(1101,"密码错误"),

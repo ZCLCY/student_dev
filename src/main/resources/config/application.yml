@@ -4,7 +4,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/student?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password: zc468082
     driver-class-name: com.mysql.jdbc.Driver
 
 
@@ -78,8 +78,7 @@ shiro:
             '/swagger-ui.html': 'anon',
             '/swagger-resources/**': 'anon',
             '/webjars/springfox-swagger-ui/**': 'anon',
-            '/druid/**': 'anon',
-            '/**': 'authc'
+            '/druid/**': 'anon'
            }"
     rememberMe:
       name: "rememberMe"
