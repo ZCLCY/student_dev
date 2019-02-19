@@ -83,8 +83,8 @@ public class UserController {
     @GetMapping("/")
     @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
-        redisTemplate.opsForValue().set("name", "zclcy");
-        System.out.println(redisTemplate.opsForValue().get("name"));
+        //redisTemplate.opsForValue().set("name", "zclcy");
+        //System.out.println(redisTemplate.opsForValue().get("name"));
         Page<User> page = new Page<>(query.getPage(), query.getLimit(), query.getSortName(), query.isAsc());
         Wrapper<User> wrapper = new EntityWrapper<>();
         if (StringUtils.isNotBlank(query.getUsername())) {

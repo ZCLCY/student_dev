@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户表
+ * 
  * </p>
  *
  * @author zhangcai
@@ -16,13 +16,16 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class User extends ModelDomain {
+public class Role extends ModelDomain {
 
     private static final long serialVersionUID = 1L;
 
-    private String number;
-    private String username;
-    private String password;
-    private String salt;
-    private Long roleId;
+    private String name;
+
+    /**
+     *  1-系统级 2-公司级 3-部门级 4-普通级
+     */
+    private Integer roleType;
+    private String roleCode;
+
 }

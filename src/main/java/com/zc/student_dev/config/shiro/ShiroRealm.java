@@ -3,7 +3,9 @@ package com.zc.student_dev.config.shiro;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.zc.student_dev.entity.Role;
 import com.zc.student_dev.entity.User;
+import com.zc.student_dev.service.IRoleService;
 import com.zc.student_dev.service.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -14,12 +16,15 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
+import java.util.Set;
 
 
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    private IRoleService iRoleService;
 
     /**
      * 执行授权逻辑
@@ -31,9 +36,9 @@ public class ShiroRealm extends AuthorizingRealm {
         System.out.println("执行授权逻辑");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User userDTO = (User) principals.getPrimaryPrincipal();   //获取用户登录信息
-        /*Set<String> roles = userService.selectRoleCodeByUserId(userDTO.getId());
+        Set<String> roles = iRoleService.queryById(userDTO.getId());
         authorizationInfo.setRoles(roles);
-        Set<String> permissions = userService.selectPermissionCodeByUserId(userDTO.getId());
+        /*Set<String> permissions = userService.selectPermissionCodeByUserId(userDTO.getId());
         authorizationInfo.setStringPermissions(permissions);*/
         return authorizationInfo;
     }
@@ -50,7 +55,7 @@ public class ShiroRealm extends AuthorizingRealm {
         Wrapper<User> wrapper = new EntityWrapper<>();
         wrapper.eq("username",username);
         User user = iUserService.selectOne(wrapper);
-        user.setId(user.getId());
+        //user.setId(user.getId());
         if(Objects.isNull(user) || Objects.isNull(user.getPassword()) || Objects.isNull(user.getSalt())){
             return null;
         }
