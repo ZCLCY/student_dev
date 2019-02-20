@@ -16,6 +16,7 @@ import com.zc.student_dev.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -80,6 +81,7 @@ public class UserController {
         return flag ? new MessageResult<Object>().ok("success") : new MessageResult<Object>().failure(ErrorCode.DATA_CURDERR);
     }
 
+    @RequiresPermissions(value = { "aa:bb" })
     @GetMapping("/")
     @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {

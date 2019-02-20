@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zc.student_dev.entity.Role;
 import com.zc.student_dev.entity.User;
 import com.zc.student_dev.service.IRoleService;
+import com.zc.student_dev.service.ISysPermissionService;
 import com.zc.student_dev.service.IUserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -25,6 +26,8 @@ public class ShiroRealm extends AuthorizingRealm {
     private IUserService iUserService;
     @Autowired
     private IRoleService iRoleService;
+    @Autowired
+    private ISysPermissionService iSysPermissionService;
 
     /**
      * 执行授权逻辑
@@ -38,8 +41,8 @@ public class ShiroRealm extends AuthorizingRealm {
         User userDTO = (User) principals.getPrimaryPrincipal();   //获取用户登录信息
         Set<String> roles = iRoleService.queryById(userDTO.getId());
         authorizationInfo.setRoles(roles);
-        /*Set<String> permissions = userService.selectPermissionCodeByUserId(userDTO.getId());
-        authorizationInfo.setStringPermissions(permissions);*/
+        Set<String> permissions = iSysPermissionService.queryById(userDTO.getId());
+        authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
     }
 
