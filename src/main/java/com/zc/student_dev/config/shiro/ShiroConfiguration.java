@@ -2,10 +2,14 @@ package com.zc.student_dev.config.shiro;
 
 import com.zc.student_dev.Util.ShiroUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.Cookie;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +31,11 @@ public class ShiroConfiguration {
 
     @Value("${shiro.config.authenticationCacheName}")
     private String authenticationCacheName;
+
+    @Value("${shiro.config.rememberMe.name}")
+    public String rememberMeName;
+    @Value("${shiro.config.rememberMe.maxAge}")
+    public Integer maxAge;
 
     /**
      * 创建ShiroFilterFactoryBean
@@ -70,7 +79,7 @@ public class ShiroConfiguration {
         // 自定义缓存实现 使用redis
         /*defaultWebSecurityManager.setCacheManager(cacheManager());*/
         // 记住登录
-        /* defaultWebSecurityManager.setRememberMeManager(rememberMeManager());*/
+         defaultWebSecurityManager.setRememberMeManager(rememberMeManager());
         return defaultWebSecurityManager;
     }
 
@@ -131,6 +140,19 @@ public class ShiroConfiguration {
         creator.setProxyTargetClass(true);
         return creator;
     }
+    //cookie()rememberMeManager()是记住我
+    @Bean
+    public Cookie cookie(){
+        SimpleCookie cookie = new SimpleCookie();
+        cookie.setName(rememberMeName);
+        cookie.setMaxAge(maxAge);
+        return cookie;
+    }
 
-
+    @Bean
+    public RememberMeManager rememberMeManager(){
+        CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
+        rememberMeManager.setCookie(cookie());
+        return rememberMeManager;
+    }
 }
