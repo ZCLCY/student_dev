@@ -57,6 +57,7 @@ public class UserController {
     }
 
 
+    @RequiresPermissions(value = { "ss:mm" })
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/{id}")
     public MessageResult<Object> delete(@PathVariable Long id) {

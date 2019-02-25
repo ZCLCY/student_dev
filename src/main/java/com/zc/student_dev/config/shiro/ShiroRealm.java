@@ -39,9 +39,9 @@ public class ShiroRealm extends AuthorizingRealm {
         System.out.println("执行授权逻辑");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User userDTO = (User) principals.getPrimaryPrincipal();   //获取用户登录信息
-        Set<String> roles = iRoleService.queryById(userDTO.getId());
+        Set<String> roles = iRoleService.queryById(userDTO.getRoleId());
         authorizationInfo.setRoles(roles);
-        Set<String> permissions = iSysPermissionService.queryById(userDTO.getId());
+        Set<String> permissions = iSysPermissionService.queryById(userDTO.getRoleId());
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
     }
