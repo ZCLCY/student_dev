@@ -32,8 +32,6 @@ import java.util.stream.Collectors;
  * 用户表 前端控制器
  * </p>
  *
- * @author zhangcai
- * @since 2018-12-03
  */
 @Api(tags = "用户")
 @RestController

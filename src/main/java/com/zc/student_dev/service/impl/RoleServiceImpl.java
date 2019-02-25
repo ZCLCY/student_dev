@@ -15,8 +15,6 @@ import java.util.Set;
  * 用户表 服务实现类
  * </p>
  *
- * @author zhangcai
- * @since 2018-12-03
  */
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {

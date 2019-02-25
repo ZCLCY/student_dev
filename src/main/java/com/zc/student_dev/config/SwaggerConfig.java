@@ -53,7 +53,7 @@ public class SwaggerConfig {
 				.description(
 						"以下API根据默认配置生成，相关API及字段缺乏开发者的说明。如果在使用中有疑义，请联系服务端开发补全相关说明。补全时参考文档：http://springfox.github.io/springfox/docs/current/")// 描述
 				// .termsOfServiceUrl("http://www.huojutech.com")//
-				.contact(new Contact("zc", "", "zc080829@163.com"))// 联系，创建人
+				.contact(new Contact("lcy", "", "lcy080829@163.com"))// 联系，创建人
 				.version(version)// 版本
 				.build();
 	}

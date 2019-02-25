@@ -4,9 +4,6 @@ import java.util.regex.Pattern;
 
 /**
  * @Description 常用工具类
- * @Author YeLuo
- * @Date 2018/11/15 9:30
- * @Modified
  **/
 public class Utils {
     /**

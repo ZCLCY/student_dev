@@ -10,8 +10,6 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author zhangcai
- * @since 2018-12-03
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

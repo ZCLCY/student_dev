@@ -6,10 +6,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-/**
- * @author: 快乐在角落里
- * @create: 2018-11-26 19:04
- */
+
 @Slf4j
 public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
 

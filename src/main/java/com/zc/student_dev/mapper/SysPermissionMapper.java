@@ -12,8 +12,6 @@ import java.util.Set;
  * 用户表 Mapper 接口
  * </p>
  *
- * @author zhangcai
- * @since 2018-12-03
  */
 @Repository
 public interface SysPermissionMapper extends BaseMapper<SysPermission> {

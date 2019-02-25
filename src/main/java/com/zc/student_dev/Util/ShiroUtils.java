@@ -1,6 +1,5 @@
 package com.zc.student_dev.Util;
 
-import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.zc.student_dev.e.SystemConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -9,16 +8,9 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.util.ThreadContext;
-import org.springframework.beans.BeanUtils;
-
-import java.lang.reflect.Field;
-import java.util.Objects;
 
 /**
  * @description: Shiro工具类
- * @author: Zhijie Yang
- * @create: 2018-10-25 10:42
  */
 @SuppressWarnings("all")
 @Slf4j

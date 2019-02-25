@@ -10,8 +10,6 @@ import java.util.Set;
  * 用户表 服务类
  * </p>
  *
- * @author zhangcai
- * @since 2018-12-03
  */
 public interface IRoleService extends IService<Role> {
 
