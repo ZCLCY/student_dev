@@ -1,6 +1,7 @@
 package com.zc.student_dev.Util;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.zc.student_dev.e.SystemConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.RandomNumberGenerator;
@@ -81,4 +82,13 @@ public class ShiroUtils {
         return new SimpleHash(HASH_ALGORITHM,password).toHex();
     }
 
+    public static boolean checkRolePermission(SystemConstants.RoleEnum... roleEnums){
+        Subject subject = SecurityUtils.getSubject();
+        for (SystemConstants.RoleEnum roleEnum : roleEnums){
+            if (subject.hasRole(roleEnum.getCode())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

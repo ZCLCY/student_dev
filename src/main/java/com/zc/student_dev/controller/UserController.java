@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zc.student_dev.Util.ShiroUtils;
 import com.zc.student_dev.Util.UUIDUtil;
+import com.zc.student_dev.e.SystemConstants;
 import com.zc.student_dev.entity.User;
 import com.zc.student_dev.error.ErrorCode;
 import com.zc.student_dev.form.UserAddFrom;
@@ -57,10 +58,13 @@ public class UserController {
     }
 
 
-    @RequiresPermissions(value = { "ss:mm" })
+    //@RequiresPermissions(value = { "ss:mm" })
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/{id}")
     public MessageResult<Object> delete(@PathVariable Long id) {
+        if (!ShiroUtils.checkRolePermission(SystemConstants.RoleEnum.SYSTEM_ADMIN)) {
+            return new MessageResult<Object>().failure(ErrorCode.ACCESS_DENIED);
+        }
         User user = iUserService.selectById(id);
         if (user == null) {
             return new MessageResult<>().failure(ErrorCode.DATA_CURDERR);
@@ -82,7 +86,7 @@ public class UserController {
         return flag ? new MessageResult<Object>().ok("success") : new MessageResult<Object>().failure(ErrorCode.DATA_CURDERR);
     }
 
-    @RequiresPermissions(value = { "aa:bb" })
+    //@RequiresPermissions(value = { "aa:bb" })
     @GetMapping("/")
     @ApiOperation(value = "查询所有用户", notes = "成功success，失败failure")
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
