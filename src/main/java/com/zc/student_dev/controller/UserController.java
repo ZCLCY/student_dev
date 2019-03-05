@@ -16,6 +16,7 @@ import com.zc.student_dev.result.MessageResult;
 import com.zc.student_dev.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
  * </p>
  *
  */
+@Slf4j
 @Api(tags = "用户")
 @RestController
 @RequestMapping("/student_dev/user")
@@ -90,6 +92,7 @@ public class UserController {
     public MessageResult<List<User>> selectSmsTemplateListPage(UserFrom query) {
         //redisTemplate.opsForValue().set("name", "zclcy");
         //System.out.println(redisTemplate.opsForValue().get("name"));
+        log.info("快乐的一只小青蛙");
         Page<User> page = new Page<>(query.getPage(), query.getLimit(), query.getSortName(), query.isAsc());
         Wrapper<User> wrapper = new EntityWrapper<>();
         if (StringUtils.isNotBlank(query.getUsername())) {
